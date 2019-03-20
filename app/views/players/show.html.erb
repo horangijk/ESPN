@@ -1,0 +1,14 @@
+<h1><%= @player.name %></h1>
+
+<h3>Stats:</h3>
+
+<ul>
+  <% @player.stats.each do |stat| %>
+    <li>PPG: <%= stat.ppg %></li>
+    <li>RPG: <%= stat.rpg %></li>
+    <li>APG: <%= stat.apg %></li>
+    <li>FGP: <%= stat.fgp %></li>
+    <li>FTP: <%= stat.ftp %></li>
+    <li>TOV: <%= stat.tov %></li>
+  <% end %>
+</ul>

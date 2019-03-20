@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ppg: MyString
+  rpg: MyString
+  apg: MyString
+  fgp: MyString
+  ftp: MyString
+  tov: MyString
+  player_id: MyString
+
+two:
+  ppg: MyString
+  rpg: MyString
+  apg: MyString
+  fgp: MyString
+  ftp: MyString
+  tov: MyString
+  player_id: MyString
