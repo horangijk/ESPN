@@ -7,9 +7,32 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <script src="jquery.js"></script>
+    <script src='app/assets/javascripts/players.js'>
+
+    </script>
   </head>
 
   <body>
-    <%= yield %>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          Players
+        </h1>
+      </div>
+      <div class="column">
+        <%= link_to "All Players", players_path, class: "all_players" %> |
+        <%= link_to "Rails:NewPlayer", new_player_path %> |
+        <%= link_to "Ajax:NewPlayer", new_player_path, class: 'ajax-new-player' %>
+        <hr>
+        <div id="flash_messages" class="flash_style">
+          <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, :class => "flash #{key}") %>
+          <% end %>
+        </div>
+        <%= yield %>
+      </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   </body>
 </html>
