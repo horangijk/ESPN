@@ -20,8 +20,7 @@
       </div>
       <div class="column">
         <%= link_to "All Players", players_path, class: "all_players" %> |
-        <%= link_to "Rails:NewPlayer", new_player_path %> |
-        <%= link_to "Ajax:NewPlayer", new_player_path, class: 'ajax-new-player' %>
+        <%= link_to "New Player", new_player_path, class: "new_player" %>
         <hr>
         <div id="flash_messages" class="flash_style">
           <% flash.each do |key, value| %>

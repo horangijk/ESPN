@@ -1,0 +1,17 @@
+<div class="players_container">
+
+
+  <form class="">
+  <%= form_for @player do |f| %>
+    Name: <%= f.text_field :name %>
+    <% @player.stats.each do |stat| %>
+      PPG: <%= f.number_field :stat.ppg %>
+      RPG: <%= f.number_field :stat.rpg %>
+      APG: <%= f.number_field :stat.apg %>
+      FGP: <%= f.number_field :stat.fgp %>
+      FTP: <%= f.number_field :stat.ftp %>
+      TOV: <%= f.number_field :stat.tov %>
+    <% end %>
+    <%= f.submit %>
+  <% end %>
+</div>
