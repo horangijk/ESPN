@@ -1,17 +1,8 @@
 <div class="players_container">
 
+  <form class="new_player" id="new_player" action="/players" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="Xm59HdQJjVENA481iOtWzZBYmKlCtP9sd4xnkvpDL6gZuCXFXePcqIy8K75DQr5b7X1MtLQajTp0D2VpO8Kqig==">
+    Name: <input type="text" name="player[name]" id="player_name">
 
-  <form class="">
-  <%= form_for @player do |f| %>
-    Name: <%= f.text_field :name %>
-    <% @player.stats.each do |stat| %>
-      PPG: <%= f.number_field :stat.ppg %>
-      RPG: <%= f.number_field :stat.rpg %>
-      APG: <%= f.number_field :stat.apg %>
-      FGP: <%= f.number_field :stat.fgp %>
-      FTP: <%= f.number_field :stat.ftp %>
-      TOV: <%= f.number_field :stat.tov %>
-    <% end %>
-    <%= f.submit %>
-  <% end %>
+    <input type="submit" class="create_player" name="commit" value="Create Player" data-disable-with="Create Player">
+</form>
 </div>

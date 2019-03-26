@@ -2,6 +2,7 @@ $(function(){
 
   listenForPlayers()
   showPlayer()
+  newPlayer()
 })
 
 function listenForPlayers(){
@@ -75,4 +76,16 @@ Player.prototype.formatShow = function(){
   `
 
   return playerHtml
+}
+
+function newPlayer(){
+  $(".new_player").on("submit", function(e){
+    e.preventDefault()
+
+
+    const values = $(this).serialize()
+    $.post('/players', values).done(function(data){
+      console.log(data)
+    })
+  })
 }
