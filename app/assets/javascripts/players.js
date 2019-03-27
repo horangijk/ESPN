@@ -63,6 +63,7 @@ Player.prototype.formatShow = function(){
   console.log(this.stats)
   let playerHtml = `
     <h3>${this.name}</h3>
+    <h5>${this.position}</h5>
     <ul>
       ${this.stats.map(stat => {
       return `<li>PPG: ${stat.ppg}</li>
@@ -84,8 +85,12 @@ function newPlayer(){
 
 
     const values = $(this).serialize()
-    $.post('/players', values).done(function(data){
-      console.log(data)
+    $.post('/players.json', values).done(function(data){
+      $('.players_container').html('')
+
+      const newPlayer = new Player(data)
+      const htmlToAdd = newPlayer.formatShow()
+      $('.players_container').html(htmlToAdd)
     })
   })
 }
