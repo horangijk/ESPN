@@ -23,7 +23,7 @@ class PlayersController < ApplicationController
   def create
     @player = Player.create(player_params)
     respond_to do |f|
-      f.html {render :create}
+      # f.html {render :create}
       f.json {render json: @player}
     end
   end

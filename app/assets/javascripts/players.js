@@ -3,6 +3,7 @@ $(function(){
   listenForPlayers()
   showPlayer()
   newPlayer()
+  sortPlayers()
 })
 
 function listenForPlayers(){
@@ -27,6 +28,7 @@ function listenForPlayers(){
 
 function Player(player){
   this.id = player.id
+  player.id = player.id
   this.name = player.name
   this.position = player.position
   this.stats = player.stats
@@ -36,7 +38,8 @@ function Player(player){
 
 Player.prototype.formatIndex = function(){
   let playerHtml = `
-    <a href='/players/${this.id}' data-id="${this.id}" class="show_link"><h1>${this.name}</h1></a>
+    <a href='/players/${this.id}' data-id="${this.id}" class="show_link"><h1>${this.name}</h1>
+    <h5>${this.position}</h5></a>
   `
   return playerHtml
 }
@@ -83,14 +86,72 @@ function newPlayer(){
   $(".new_player").on("submit", function(e){
     e.preventDefault()
 
+    const name = e.target.name.value
+    const position = e.target.position.value
 
-    const values = $(this).serialize()
-    $.post('/players.json', values).done(function(data){
-      $('.players_container').html('')
+    const playerObj = { player: {name: name, position: position}}
+    console.log(playerObj);
 
-      const newPlayer = new Player(data)
-      const htmlToAdd = newPlayer.formatShow()
-      $('.players_container').html(htmlToAdd)
+    fetch('http://localhost:3000/players', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(playerObj)
     })
+    .then(res => res.json())
+    .then(data => {
+      $('.players_container').html('')
+      $('.players_container').html(`<h3>${data.name}</h3>
+      <h5>${data.position}</h5>`)
+    })
+    //
+    // const values = $(this).serialize()
+    // $.post('/players', values).done(function(data){
+    //   $('.players_container').html('')
+    //   console.log(data);
+    //   const newPlayer = new Player(data)
+    //   const htmlToAdd = newPlayer.formatShow()
+    //   $('.players_container').html(htmlToAdd)
+    // })
+  })
+}
+
+function sortPlayers() {
+  $(".sorted_players").on("click", function(e) {
+    e.preventDefault()
+    fetch("/players.json")
+      .then(res => res.json())
+      .then(players => {
+        $('.players_container').html('')
+        let sortedPlayers = players.sort(function(a, b) {
+          var positionA = a.position.toUpperCase(); // ignore upper and lowercase
+          var positionB = b.position.toUpperCase(); // ignore upper and lowercase
+          if (positionA < positionB) {
+            return -1;
+          }
+          if (positionA > positionB) {
+            return 1;
+          }
+
+          var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+
+
+          // positions must be equal
+          return 0;
+        });
+
+        sortedPlayers.forEach(player => {
+          let newPlayer = new Player(player)
+          let playerHtml = newPlayer.formatIndex()
+
+          $('.players_container').append(playerHtml)
+        })
+      })
   })
 }

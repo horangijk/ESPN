@@ -22,6 +22,7 @@
         <%= link_to "All Players", players_path, class: "all_players" %> |
         <%= link_to "New Player", new_player_path, class: "new_player" %>
         <hr>
+        <%= link_to "Sort Players", players_path, class: "sorted_players"%>
         <div id="flash_messages" class="flash_style">
           <% flash.each do |key, value| %>
             <%= content_tag(:div, value, :class => "flash #{key}") %>
